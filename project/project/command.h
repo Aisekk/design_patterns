@@ -15,16 +15,16 @@ public:
 
     void Insert(int line, const string& str)
     {
-        if (line <= data.capacity())
-            data.insert(data.begin() + line, str);
+        if (line <= data.size())
+            data.insert(std::next(data.begin(), line), str);
         else
             cout << "Error!" << endl;
     }
 
     void Remove(int line)
     {
-        if (!(line > data.size()))
-            data.erase(data.begin() + line);
+        if (line <= data.size())
+            data.erase(std::next(data.begin(), line));
         else
             cout << "Error!" << endl;
     }
@@ -142,6 +142,5 @@ void command()
         cout << "$$$DOCUMENT$$$" << endl;
         inv.Show();
         cout << "$$$DOCUMENT$$$" << endl;
-        break;
     }
 }

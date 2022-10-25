@@ -87,10 +87,11 @@ public:
 
     void Insert(int line, string str)
     {
-        _command = new InsertCommand(line, str);
-        _command->setDocument(_doc);
-        _command->Execute();
-        _doneCommands.push_back(_command);
+        auto command = new InsertCommand(line, str);
+        command->setDocument(_doc);
+        command->Execute();
+        _doneCommands.push_back(command);
+        _command = command;
     }
 
     void Undo()
@@ -101,11 +102,11 @@ public:
         }
         else
         {
-            _command = _doneCommands.back();
+            auto command = _doneCommands.back();
             _doneCommands.pop_back();
-            _command->unExecute();
+            command->unExecute();
             // Don't forget to delete command!!!
-            delete _command;
+            delete command;
         }
     }
 

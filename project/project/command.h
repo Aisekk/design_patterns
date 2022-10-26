@@ -4,7 +4,15 @@
 #include <string>
 using namespace std;
 
-class Document
+/*
+Паттерн комманда включает в себя:
+ комманда (command);
+ приемник комманд (receiver);
+ объект, вызывающий комманды (invoker);
+ клиент (client)
+ */
+
+class Document // Receiver
 {
     vector<string> data;
 public:
@@ -46,7 +54,7 @@ public:
 class Command
 {
 protected:
-    Document* _doc;
+    Document* _doc = nullptr;
 public:
     virtual ~Command() {}
     virtual void Execute() = 0;
@@ -65,12 +73,12 @@ class InsertCommand : public Command
 public:
     InsertCommand(int line, const string& str) : _line(line), _str(str) {}
 
-    void Execute()
+    void Execute() override
     {
         _doc->Insert(_line, _str);
     }
 
-    void unExecute()
+    void unExecute() override
     {
         _doc->Remove(_line);
     }
@@ -79,8 +87,8 @@ public:
 class Invoker
 {
     vector<Command*> _doneCommands;
-    Document* _doc;
-    Command* _command;
+    Document* _doc = nullptr;
+    Command* _command = nullptr;
 public:
     Invoker() : _doc(new Document) {}
     ~Invoker() { delete _doc; }
@@ -116,7 +124,7 @@ public:
     }
 };
 
-void command()
+void command() // Client
 {
     cout << "=========== COMMAND ===========" << endl;
     char s = '1';

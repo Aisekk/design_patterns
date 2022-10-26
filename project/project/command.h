@@ -14,39 +14,39 @@ using namespace std;
 
 class Document // Receiver
 {
-    vector<string> data;
+    vector<string> _data;
 public:
     Document()
     {
-        data.reserve(100); // at least for 100 lines
+        _data.reserve(100); // at least for 100 lines
     }
 
     void Insert(int line, const string& str)
     {
-        if (line <= data.size())
-            data.insert(std::next(data.begin(), line), str);
+        if (line <= _data.size())
+            _data.insert(std::next(_data.begin(), line), str);
         else
             cout << "Error!" << endl;
     }
 
     void Remove(int line)
     {
-        if (line <= data.size())
-            data.erase(std::next(data.begin(), line));
+        if (line <= _data.size())
+            _data.erase(std::next(_data.begin(), line));
         else
             cout << "Error!" << endl;
     }
 
     string& operator [] (int x)
     {
-        return data[x];
+        return _data[x];
     }
 
     void Show()
     {
-        for (int i = 0; i < data.size(); ++i)
+        for (int i = 0; i < _data.size(); ++i)
         {
-            cout << i + 1 << ". " << data[i] << endl;
+            cout << i + 1 << ". " << _data[i] << endl;
         }
     }
 };

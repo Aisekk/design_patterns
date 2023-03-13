@@ -11,7 +11,7 @@ int main()
     //flyweight();
     //flyweight_cppref();
     objectPool();
-    // new pattern
+    // fake pattern
 
     system("pause");
 	return 0;
